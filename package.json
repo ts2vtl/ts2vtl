@@ -1,0 +1,23 @@
+{
+  "name": "ts2vtl",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TypeScript to VTL",
+  "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/nak2k/ts2vtl/issues"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/nak2k/ts2vtl",
+  "keywords": [
+    "aws",
+    "typescript",
+    "vtl"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nak2k/ts2vtl.git"
+  },
+  "scripts": {}
+}

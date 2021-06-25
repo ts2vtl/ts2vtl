@@ -1,0 +1,39 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "watch",
+			"problemMatcher": [
+				"$tsc-watch"
+			],
+			"group": "build",
+			"label": "@ts2vtl/core: watch",
+			"detail": "tsc -w",
+			"path": "packages/@ts2vtl/core/package.json",
+			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "watch",
+			"problemMatcher": [
+				"$tsc-watch"
+			],
+			"group": "build",
+			"label": "ts2vtl: watch",
+			"detail": "tsc -w",
+			"path": "packages/ts2vtl/package.json",
+			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"problemMatcher": [],
+			"group": "build",
+			"label": "ts2vtl: test example",
+			"detail": "",
+			"path": "packages/ts2vtl/example/package.json",
+			"isBackground": true
+		}
+	]
+}

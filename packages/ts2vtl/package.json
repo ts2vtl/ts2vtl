@@ -1,0 +1,43 @@
+{
+  "name": "ts2vtl",
+  "version": "0.1.0",
+  "description": "TypeScript to VTL",
+  "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
+  "bin": {
+    "ts2vtl": "bin/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/nak2k/ts2vtl/issues"
+  },
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.6",
+    "@types/yargs": "^17.0.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "ts-morph": "^11.0.0",
+    "typescript": "^3.9.10"
+  },
+  "homepage": "https://github.com/nak2k/ts2vtl/tree/master/ts2vtl",
+  "keywords": [],
+  "license": "MIT",
+  "main": "lib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nak2k/ts2vtl.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf lib",
+    "watch": "tsc -w",
+    "prepublishOnly": "npm run build",
+    "postpublish": "npm-sns"
+  },
+  "files": [
+    "README.md",
+    "lib/"
+  ]
+}

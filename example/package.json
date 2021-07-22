@@ -1,0 +1,31 @@
+{
+  "name": "ts2vtl-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TS2VTL Example",
+  "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
+  "devDependencies": {
+    "@aws-cdk/aws-apigateway": "^1.115.0",
+    "@aws-cdk/aws-appsync": "^1.115.0",
+    "@aws-cdk/core": "^1.115.0",
+    "@cdk-util/core": "^0.1.1",
+    "@ts2vtl/aws-appsync": "^0.1.0",
+    "@ts2vtl/core": "^0.1.0",
+    "@types/node": "^16.4.0",
+    "aws-cdk": "^1.115.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.0",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nak2k/ts2vtl.git"
+  },
+  "scripts": {
+    "clean": "rimraf cdk.out",
+    "deploy": "run-s deploy:*",
+    "deploy:TS2VTLAppSyncExampleStack": "cdk deploy TS2VTLExampleStack"
+  },
+  "files": []
+}

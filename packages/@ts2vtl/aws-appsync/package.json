@@ -32,5 +32,8 @@
   "files": [
     "README.md",
     "lib/"
-  ]
+  ],
+  "dependencies": {
+    "@ts2vtl/java-types": "^0.1.0"
+  }
 }

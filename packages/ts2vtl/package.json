@@ -10,6 +10,7 @@
     "url": "https://github.com/nak2k/ts2vtl/issues"
   },
   "dependencies": {
+    "@ts2vtl/core": "^0.1.0",
     "chalk": "^4.1.1",
     "yargs": "^17.0.1"
   },

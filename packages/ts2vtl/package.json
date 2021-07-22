@@ -7,7 +7,7 @@
     "ts2vtl": "bin/cli"
   },
   "bugs": {
-    "url": "https://github.com/nak2k/ts2vtl/issues"
+    "url": "https://github.com/ts2vtl/ts2vtl/issues"
   },
   "dependencies": {
     "@ts2vtl/core": "^0.1.0",
@@ -22,13 +22,13 @@
     "ts-morph": "^11.0.0",
     "typescript": "^3.9.10"
   },
-  "homepage": "https://github.com/nak2k/ts2vtl/tree/master/ts2vtl",
+  "homepage": "https://github.com/ts2vtl/ts2vtl/tree/master/ts2vtl",
   "keywords": [],
   "license": "MIT",
   "main": "lib",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nak2k/ts2vtl.git"
+    "url": "git+https://github.com/ts2vtl/ts2vtl.git"
   },
   "scripts": {
     "build": "tsc",

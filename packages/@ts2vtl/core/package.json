@@ -4,7 +4,7 @@
   "description": "TS2VTL core package",
   "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
   "bugs": {
-    "url": "https://github.com/nak2k/ts2vtl/issues"
+    "url": "https://github.com/ts2vtl/ts2vtl/issues"
   },
   "dependencies": {
     "@ts2vtl/vtl": "^0.1.0",
@@ -16,13 +16,13 @@
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"
   },
-  "homepage": "https://github.com/nak2k/ts2vtl/tree/master/packages/@ts2vtl/core",
+  "homepage": "https://github.com/ts2vtl/ts2vtl/tree/master/packages/@ts2vtl/core",
   "keywords": [],
   "license": "MIT",
   "main": "lib",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nak2k/ts2vtl.git"
+    "url": "git+https://github.com/ts2vtl/ts2vtl.git"
   },
   "scripts": {
     "build": "tsc",

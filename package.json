@@ -5,10 +5,10 @@
   "description": "TypeScript to VTL",
   "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
   "bugs": {
-    "url": "https://github.com/nak2k/ts2vtl/issues"
+    "url": "https://github.com/ts2vtl/ts2vtl/issues"
   },
   "devDependencies": {},
-  "homepage": "https://github.com/nak2k/ts2vtl",
+  "homepage": "https://github.com/ts2vtl/ts2vtl",
   "keywords": [
     "aws",
     "typescript",
@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nak2k/ts2vtl.git"
+    "url": "git+https://github.com/ts2vtl/ts2vtl.git"
   },
   "scripts": {}
 }

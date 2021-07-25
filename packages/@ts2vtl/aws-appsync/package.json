@@ -12,6 +12,9 @@
     "rimraf": "^3.0.2",
     "typescript": "^4.3.4"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/ts2vtl/ts2vtl/tree/master/packages/@ts2vtl/aws-appsync",
   "keywords": [],
   "license": "MIT",

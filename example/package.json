@@ -25,7 +25,7 @@
   "scripts": {
     "clean": "rimraf cdk.out",
     "deploy": "run-s deploy:*",
-    "deploy:TS2VTLAppSyncExampleStack": "cdk deploy TS2VTLExampleStack"
+    "deploy:TS2VTLExampleStack": "cdk deploy TS2VTLExampleStack"
   },
   "files": []
 }

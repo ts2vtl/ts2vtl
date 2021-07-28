@@ -25,6 +25,9 @@ export class TS2VTLExampleStack extends DefaultEnvStack {
       tsConfigFilePath: "tsconfig.json",
     });
 
+    //
+    // Generate VTL.
+    //
     const source = project.getSourceFileOrThrow("templates/Query_getItem_request.ts");
 
     const transpiler = createTranspiler({ source });
@@ -41,6 +44,9 @@ export class TS2VTLExampleStack extends DefaultEnvStack {
 
     const vtlString = generator.generateTemplate(files[0]);
 
+    //
+    // Define GraphQL API.
+    //
     const schema = new Schema();
 
     const graphqlApi = new GraphqlApi(this, "graphqlApi", {

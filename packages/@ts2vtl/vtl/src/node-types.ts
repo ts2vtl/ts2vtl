@@ -83,15 +83,37 @@ export const TOKEN_TO_STRING = {
   [SyntaxKind.BarBarToken]: '||',
 }
 
+/**
+ * The node of AST for VTL.
+ */
 export interface Node {
+  /**
+   * The kind of this node.
+   */
   kind: any;
+
+  /**
+   * The TypeScript node from which this node is generated.
+   */
   node?: tsMorph.Node;
 }
 
+/**
+ * The node presents one file of VTL.
+ * 
+ * This node is generated from the function declaration in TypeScript.
+ */
 export interface File extends Node {
   kind: SyntaxKind.File;
   node: tsMorph.FunctionDeclaration;
+
+  /**
+   * The name of the VTL file.
+   * 
+   * This value is set the name of the function in TypeScript.
+   */
   name: string;
+
   block: Block;
 }
 

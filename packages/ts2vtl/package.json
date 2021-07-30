@@ -32,9 +32,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "clean": "rimraf lib",
+    "clean": "rimraf lib *.tgz",
+    "prepare": "run-s clean build",
     "watch": "tsc -w",
-    "prepublishOnly": "npm run build",
     "postpublish": "npm-sns"
   },
   "files": [

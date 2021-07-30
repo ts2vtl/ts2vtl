@@ -28,7 +28,7 @@
     "clean": "rimraf cdk.out",
     "deploy": "run-s deploy:*",
     "deploy:TS2VTLExampleStack": "cdk deploy TS2VTLExampleStack",
-    "postinstall": "npm-install-from-local install"
+    "preinstall": "npm-install-from-local install"
   },
   "files": [],
   "npm-install-from-local": {

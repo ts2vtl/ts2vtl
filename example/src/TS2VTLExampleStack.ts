@@ -28,7 +28,7 @@ export class TS2VTLExampleStack extends DefaultEnvStack {
     //
     // Generate VTL.
     //
-    const source = project.getSourceFileOrThrow("templates/Query_getItem_request.ts");
+    const source = project.getSourceFileOrThrow("templates/Query_getItem.ts");
 
     const transpiler = createTranspiler({ source });
 
@@ -38,11 +38,13 @@ export class TS2VTLExampleStack extends DefaultEnvStack {
       throw new Error('Generating VTL failed');
     }
 
-    const generator = vtl.createGenerator();
+    const templates: { [name: string]: string } = {};
 
-    const files = transpiler.getFiles();
-
-    const vtlString = generator.generateTemplate(files[0]);
+    for (const file of transpiler.getFiles()) {
+      const generator = vtl.createGenerator();
+      const vtlString = generator.generateTemplate(file);
+      templates[file.name] = vtlString;
+    }
 
     //
     // Define GraphQL API.
@@ -77,8 +79,8 @@ export class TS2VTLExampleStack extends DefaultEnvStack {
         id: GraphqlType.string(),
       },
       dataSource: demoTableDataSource,
-      requestMappingTemplate: MappingTemplate.fromString(vtlString),
-      responseMappingTemplate: MappingTemplate.dynamoDbResultItem(),
+      requestMappingTemplate: MappingTemplate.fromString(templates["request"]),
+      responseMappingTemplate: MappingTemplate.fromString(templates["response"]),
     }));
   }
 }

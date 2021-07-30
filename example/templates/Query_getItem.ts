@@ -1,6 +1,6 @@
 import { $util, $ctx } from "@ts2vtl/aws-appsync";
 
-export default function () {
+export function request() {
   return {
     "version": "2017-02-28",
     "operation": "GetItem",
@@ -8,4 +8,8 @@ export default function () {
       "id": $util.dynamodb.toDynamoDBJson($ctx.args.id),
     }
   };
+}
+
+export function response() {
+  return $util.toJson($ctx.result);
 }

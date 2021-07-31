@@ -28,22 +28,26 @@ export class TS2VTLExampleStack extends DefaultEnvStack {
     //
     // Generate VTL.
     //
-    const source = project.getSourceFileOrThrow("templates/Query_getItem.ts");
-
-    const transpiler = createTranspiler({ source });
-
-    const errors = transpiler.getErrors();
-    if (errors.length) {
-      vtl.printVTLErrors(errors);
-      throw new Error('Generating VTL failed');
-    }
-
+    const sources = project.getSourceFiles("templates/*.ts");
     const templates: { [name: string]: string } = {};
 
-    for (const file of transpiler.getFiles()) {
-      const generator = vtl.createGenerator();
-      const vtlString = generator.generateTemplate(file);
-      templates[file.name] = vtlString;
+    for (const source of sources) {
+      const moduleName = source.getBaseNameWithoutExtension();
+
+      const transpiler = createTranspiler({ source });
+
+      const errors = transpiler.getErrors();
+      if (errors.length) {
+        vtl.printVTLErrors(errors);
+        throw new Error('Generating VTL failed');
+      }
+
+      for (const file of transpiler.getFiles()) {
+        const generator = vtl.createGenerator();
+        const vtlString = generator.generateTemplate(file);
+
+        templates[`${moduleName}.${file.name}`] = vtlString;
+      }
     }
 
     //
@@ -79,8 +83,8 @@ export class TS2VTLExampleStack extends DefaultEnvStack {
         id: GraphqlType.string(),
       },
       dataSource: demoTableDataSource,
-      requestMappingTemplate: MappingTemplate.fromString(templates["request"]),
-      responseMappingTemplate: MappingTemplate.fromString(templates["response"]),
+      requestMappingTemplate: MappingTemplate.fromString(templates["Query_getItem.request"]),
+      responseMappingTemplate: MappingTemplate.fromString(templates["Query_getItem.response"]),
     }));
   }
 }

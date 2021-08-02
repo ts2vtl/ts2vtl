@@ -65,6 +65,7 @@ export function createGenerator(options: GeneratorOptions = {}): Generator {
       }
       write(')');
     } else if (vtl.isFile(node)) {
+      writeCommentLine(`Module: ${node.node.getSourceFile().getBaseNameWithoutExtension()}`);
       writeCommentLine(`Function: ${node.name}`);
       visitNode(node.block);
     } else if (vtl.isForeachDirective(node)) {

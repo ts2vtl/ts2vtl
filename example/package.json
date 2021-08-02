@@ -10,8 +10,10 @@
     "@aws-cdk/aws-dynamodb": "^1.115.0",
     "@aws-cdk/core": "^1.115.0",
     "@cdk-util/core": "^0.1.1",
-    "@ts2vtl/aws-appsync": "file:../packages/@ts2vtl/aws-appsync/ts2vtl-aws-appsync-0.1.0.tgz",
+    "@ts2vtl/aws-appsync": "file:../packages/@ts2vtl/aws-appsync/ts2vtl-aws-appsync-0.1.2.tgz",
     "@ts2vtl/core": "^0.1.0",
+    "@ts2vtl/java-types": "^0.1.0",
+    "@ts2vtl/vtl": "file:../packages/@ts2vtl/vtl/ts2vtl-vtl-0.1.0.tgz",
     "@types/node": "^16.4.0",
     "aws-cdk": "^1.115.0",
     "npm-install-from-local": "^0.2.2",
@@ -33,7 +35,8 @@
   "files": [],
   "npm-install-from-local": {
     "devDependencies": {
-      "@ts2vtl/aws-appsync": "../packages/@ts2vtl/aws-appsync"
+      "@ts2vtl/aws-appsync": "../packages/@ts2vtl/aws-appsync",
+      "@ts2vtl/vtl": "../packages/@ts2vtl/vtl"
     }
   }
 }

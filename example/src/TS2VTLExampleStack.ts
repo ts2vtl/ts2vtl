@@ -86,5 +86,17 @@ export class TS2VTLExampleStack extends DefaultEnvStack {
       requestMappingTemplate: MappingTemplate.fromString(templates["Query_getItem.request"]),
       responseMappingTemplate: MappingTemplate.fromString(templates["Query_getItem.response"]),
     }));
+
+    schema.addQuery("updateItem", new ResolvableField({
+      returnType: GraphqlType.intermediate({
+        intermediateType: itemType,
+      }),
+      args: {
+        id: GraphqlType.string(),
+      },
+      dataSource: demoTableDataSource,
+      requestMappingTemplate: MappingTemplate.fromString(templates["Query_updateItem.request"]),
+      responseMappingTemplate: MappingTemplate.fromString(templates["Query_updateItem.response"]),
+    }));
   }
 }

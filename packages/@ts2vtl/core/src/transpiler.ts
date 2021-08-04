@@ -1159,6 +1159,16 @@ export function createTranspiler(options: { source: SourceFile }): Transpiler {
     });
   }
 
+  /**
+   * Genrate following VTL code to get a reference of java.lang.String class.
+   * 
+   * ```
+   * #set($String='')
+   * #set($String=$String.class)
+   * ```
+   * 
+   * This $String variable is used to call String.format() or String.join().
+   */
   function preludeStringClass() {
     const String = createIdentifier({ text: 'String' });
     const klass = createIdentifier({ text: 'class' });
@@ -1189,6 +1199,12 @@ function createLeadingEmptyLines(node: Statement): vtl.BlockElement[] {
   return Array.from({ length }, () => vtl.createNewLine());
 }
 
+/**
+ * Return whether a source file is in packages of @ts2vtl or not.
+ * 
+ * @param source 
+ * @returns 
+ */
 function isInTS2VTLScope(source: SourceFile) {
   return source.getFilePath().split("/").includes("@ts2vtl");
 }

@@ -52,7 +52,17 @@ export interface Transpiler {
   getFiles(): vtl.File[];
 }
 
-export function createTranspiler(options: { source: SourceFile }): Transpiler {
+export interface CreateTranspilerOptions {
+  source: SourceFile;
+}
+
+/**
+ * Create a transpiler to convert from TypeScript to VTL.
+ * 
+ * @param options 
+ * @returns 
+ */
+export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
   const errors: vtl.VTLError[] = [];
   let localVariableReferences = 0;
   let preludeFlags: {

@@ -54,6 +54,13 @@ export interface Transpiler {
 
 export interface CreateTranspilerOptions {
   source: SourceFile;
+
+  /**
+   * Specify which AWS service the template to be generated will be used for.
+   * 
+   * @default "appsync"
+   */
+  targetService?: "appsync" | "apigateway";
 }
 
 /**
@@ -454,29 +461,42 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
       }
     }
 
-    let ref = expressionToReference(vtlExpression);
+    const ref = expressionToReference(vtlExpression);
     if (!ref) {
       appendNotImplementedSyntaxError(expression, 'in the expresion statement');
       return [];
-    } else if (vtl.isMethodReference(ref) && ref.node && Node.isCallExpression(ref.node)) {
+    }
+
+    let block: vtl.BlockElement = ref;
+    if (vtl.isMethodReference(ref) && ref.node && Node.isCallExpression(ref.node)) {
       if (!checkReturnVoid(ref.node)) {
-        const expression = vtl.createPropertyNotation({
-          expression: createIdentifier({ text: 'util', node: ref.node }),
-          name: createIdentifier({ text: 'qr', node: ref.node }),
-          node: ref.node,
-        });
-        ref = vtl.createMethodReference({
-          expression: vtl.createCallExpression({
-            expression,
-            arguments: [ref],
+        const { targetService = "appsync" } = options;
+
+        if (targetService === "appsync") {
+          const expression = vtl.createPropertyNotation({
+            expression: createIdentifier({ text: 'util', node: ref.node }),
+            name: createIdentifier({ text: 'qr', node: ref.node }),
             node: ref.node,
-          }),
-          node: ref.node,
-        });
+          });
+          block = vtl.createMethodReference({
+            expression: vtl.createCallExpression({
+              expression,
+              arguments: [ref],
+              node: ref.node,
+            }),
+            node: ref.node,
+          });
+        } else if (targetService === "apigateway") {
+          block = vtl.createSetDirective({
+            ref: createLocalVariableReference(ref.node),
+            arg: ref,
+            node: ref.node,
+          });
+        }
       }
     }
 
-    return [ref, vtl.createNewLine()];
+    return [block, vtl.createNewLine()];
 
     function checkReturnVoid(node: CallExpression) {
       return node.getReturnType().getText() === 'void';

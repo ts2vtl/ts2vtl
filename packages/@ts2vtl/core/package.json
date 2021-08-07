@@ -12,9 +12,17 @@
     "typescript": "^4.3.4"
   },
   "devDependencies": {
+    "@jest/globals": "^27.0.6",
+    "@ts2vtl/aws-apigateway": "file:../aws-apigateway/ts2vtl-aws-apigateway-0.1.0.tgz",
+    "@ts2vtl/aws-appsync": "file:../aws-appsync/ts2vtl-aws-appsync-0.1.2.tgz",
+    "@ts2vtl/java-types": "file:../java-types/ts2vtl-java-types-0.1.0.tgz",
+    "@types/jest": "^26.0.24",
     "@types/node": "^15.12.4",
+    "jest": "^27.0.6",
+    "npm-install-from-local": "^0.2.2",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.4"
   },
   "publishConfig": {
     "access": "public"
@@ -33,11 +41,30 @@
     "prepare": "run-s test",
     "postpublish": "npm-sns",
     "pretest": "run-s clean build",
-    "test": "",
-    "watch": "tsc -w"
+    "test": "jest",
+    "watch": "tsc -w",
+    "preinstall": "npm-install-from-local install"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testRegex": "test/.*\\.test\\.(ts|tsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   },
   "files": [
     "README.md",
     "lib/"
-  ]
+  ],
+  "npm-install-from-local": {
+    "devDependencies": {
+      "@ts2vtl/aws-apigateway": "../aws-apigateway",
+      "@ts2vtl/aws-appsync": "../aws-appsync",
+      "@ts2vtl/java-types": "../java-types"
+    }
+  }
 }

@@ -70,6 +70,8 @@ export interface CreateTranspilerOptions {
  * @returns 
  */
 export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
+  const { targetService = "appsync" } = options;
+
   const errors: vtl.VTLError[] = [];
   let localVariableReferences = 0;
   let preludeFlags: {
@@ -116,6 +118,16 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
     return vtl.createVariableReference({
       name: createIdentifier({
         text: `local_${localVariableReferences++}`,
+        node,
+      }),
+      node,
+    })
+  }
+
+  function createDiscardVariableReference(node?: Node) {
+    return vtl.createVariableReference({
+      name: createIdentifier({
+        text: `discard`,
         node,
       }),
       node,
@@ -470,8 +482,6 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
     let block: vtl.BlockElement = ref;
     if (vtl.isMethodReference(ref) && ref.node && Node.isCallExpression(ref.node)) {
       if (!checkReturnVoid(ref.node)) {
-        const { targetService = "appsync" } = options;
-
         if (targetService === "appsync") {
           const expression = vtl.createPropertyNotation({
             expression: createIdentifier({ text: 'util', node: ref.node }),
@@ -488,7 +498,7 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
           });
         } else if (targetService === "apigateway") {
           block = vtl.createSetDirective({
-            ref: createLocalVariableReference(ref.node),
+            ref: createDiscardVariableReference(ref.node),
             arg: ref,
             node: ref.node,
           });
@@ -973,10 +983,17 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
   }
 
   function visitThisKeyword(node: Node) {
-    return createIdentifier({
-      text: 'ctx',
-      node,
-    });
+    if (targetService === "apigateway") {
+      return createIdentifier({
+        text: 'context',
+        node,
+      });
+    } else {
+      return createIdentifier({
+        text: 'ctx',
+        node,
+      });
+    }
   }
 
   function visitVariableDeclaration(node: VariableDeclaration): vtl.BlockElement[] {
@@ -1104,6 +1121,10 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
       }
 
       if (!symbol.getValueDeclaration() || !Node.isParameterDeclaration(symbol.getValueDeclaration())) {
+        return;
+      }
+
+      if (targetService === "apigateway") {
         return;
       }
 

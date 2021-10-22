@@ -43,7 +43,7 @@
     "pretest": "run-s clean build",
     "test": "jest",
     "watch": "tsc -w",
-    "preinstall": "npm-install-from-local install"
+    "reinstall": "npm-install-from-local install"
   },
   "jest": {
     "transform": {

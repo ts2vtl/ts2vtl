@@ -1,6 +1,6 @@
 {
   "name": "@ts2vtl/aws-apigateway",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TS2VTL definitions for Amazon API Gateway",
   "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
   "bugs": {

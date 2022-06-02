@@ -140,6 +140,7 @@ export class TS2VTLExampleStack extends DefaultEnvStack {
     //
     const restApi = new RestApi(this, "restApi", {
       restApiName: "ts2vtl",
+      cloudWatchRole: false,
     });
 
     const templateMockIntegration = new TextMockIntegration({

@@ -1,11 +1,11 @@
-import { Construct, RemovalPolicy } from "@aws-cdk/core";
-import { DefaultEnvStack } from "@cdk-util/core";
-import { RestApi } from "@aws-cdk/aws-apigateway";
-import { RestApiBuilder, TextMockIntegration } from "@cdk-util/aws-apigateway";
-import { AuthorizationType, GraphqlApi, GraphqlType, MappingTemplate, ObjectType, ResolvableField, Schema } from "@aws-cdk/aws-appsync";
-import { AttributeType, BillingMode, Table } from "@aws-cdk/aws-dynamodb";
-import { Project } from 'ts-morph';
+import { AuthorizationType, GraphqlApi, GraphqlType, MappingTemplate, ObjectType, ResolvableField, Schema } from "@aws-cdk/aws-appsync-alpha";
 import { createTranspiler, vtl } from "@ts2vtl/core";
+import { RemovalPolicy } from "aws-cdk-lib";
+import { RestApi } from "aws-cdk-lib/aws-apigateway";
+import { AttributeType, BillingMode, Table } from "aws-cdk-lib/aws-dynamodb";
+import { DefaultEnvStack, RestApiBuilder, TextMockIntegration } from "aws-cdk-util";
+import { Construct } from "constructs";
+import { Project } from 'ts-morph';
 
 export class TS2VTLExampleStack extends DefaultEnvStack {
   private project: Project;

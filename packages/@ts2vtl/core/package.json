@@ -1,6 +1,6 @@
 {
   "name": "@ts2vtl/core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "TS2VTL core package",
   "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
   "bugs": {

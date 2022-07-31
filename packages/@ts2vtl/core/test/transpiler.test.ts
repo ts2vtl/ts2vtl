@@ -40,7 +40,7 @@ test('appsync-template', () => {
 #set($expression = [])
 
 #if(!\${expSet.isEmpty()})
-  \${util.qr(\${expression.add(\\"SET\\")})}
+  \${util.qr(\${expression.add('SET')})}
 
   #set($terms = [])
   #foreach($entry in \${expSet.entrySet()})
@@ -48,18 +48,18 @@ test('appsync-template', () => {
     #set(\${expValues[\${entry.key}]} = \${entry.value})
   #end
 
-  \${util.qr(\${expression.add(\${String.join(\\",\\", $terms)})})}
+  \${util.qr(\${expression.add(\${String.join(',', $terms)})})}
 #end
 
 #if(!\${expRemove.isEmpty()})
-  \${util.qr(\${expression.add(\\"REMOVE\\")})}
+  \${util.qr(\${expression.add('REMOVE')})}
 
   #set($terms = [])
   #foreach($entry in $expRemove)
     \${util.qr(\${terms.add(\\"#$entry\\")})}
   #end
 
-  \${util.qr(\${expression.add(\${String.join(\\",\\", $terms)})})}
+  \${util.qr(\${expression.add(\${String.join(',', $terms)})})}
 #end
 
 #set($expNames = [])
@@ -83,7 +83,7 @@ test('appsync-template', () => {
     \\"id\\": \${util.dynamodb.toDynamoDBJson(\${ctx.arguments.id})}
   },
   \\"update\\": {
-    \\"expression\\": \${util.toJson(\${String.join(\\" \\", $expression)})},
+    \\"expression\\": \${util.toJson(\${String.join(' ', $expression)})},
     \\"expressionNames\\": \${util.toJson($expressionNames)},
     \\"expressionValues\\": \${util.toJson($expressionValues)}
   }

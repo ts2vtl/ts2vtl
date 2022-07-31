@@ -954,7 +954,7 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
   }
 
   function visitStringLiteral(node: StringLiteral) {
-    return vtl.createStringLiteral({ value: node.getLiteralValue(), node });
+    return vtl.createStringLiteral({ value: node.getLiteralValue(), quoteKind: node.getQuoteKind(), node });
   }
 
   function visitTemplateExpression(node: TemplateExpression, directives: vtl.Directive[]) {

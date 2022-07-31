@@ -26,6 +26,7 @@ import {
   VariableStatement,
 } from "ts-morph";
 import * as vtl from '@ts2vtl/vtl';
+import { createPropertyAssignment, createStringLiteral } from "@ts2vtl/vtl";
 
 
 const TS_TO_VTL_FOR_BINARY_OPEATOR_TOKEN: { [kind: number]: vtl.BinaryOperatorToken } = {
@@ -75,6 +76,7 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
   const errors: vtl.VTLError[] = [];
   let localVariableReferences = 0;
   let preludeFlags: {
+    esc?: boolean,
     stringClass?: boolean,
   } = {};
 
@@ -654,6 +656,10 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
 
     const preludeCode: vtl.BlockElement[] = [];
 
+    if (preludeFlags.esc) {
+      preludeCode.push(...preludeEsc());
+    }
+
     if (preludeFlags.stringClass) {
       preludeCode.push(...preludeStringClass());
     }
@@ -952,7 +958,7 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
   }
 
   function visitTemplateExpression(node: TemplateExpression, directives: vtl.Directive[]) {
-    const head = node.getHead().getLiteralText() || '';
+    const head = escape(node.getHead().getLiteralText() || '');
 
     const templateSpans = node.getTemplateSpans().flatMap(node => {
       const expression = node.getExpression();
@@ -970,7 +976,7 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
 
       return vtl.createTemplateSpan({
         expression: vtlExpression,
-        literal: node.getLiteral().getLiteralText() || '',
+        literal: escape(node.getLiteral().getLiteralText() || ''),
         node,
       });
     });
@@ -980,6 +986,16 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
       templateSpans,
       node,
     });
+
+    function escape(text: string) {
+      if (text.indexOf("\"") < 0) {
+        return text;
+      }
+
+      preludeFlags.esc = true;
+
+      return text.replace(/"/g, "${esc.q}");
+    }
   }
 
   function visitThisKeyword(node: Node) {
@@ -1208,6 +1224,38 @@ export function createTranspiler(options: CreateTranspilerOptions): Transpiler {
       }),
       node: identifier,
     });
+  }
+
+  /**
+   * Genrate following VTL code.
+   *
+   * ```
+   * #set($esc={"q":'"'})
+   * ```
+   * 
+   * This $esc variable is used to present double quotes in template strings.
+   */
+  function preludeEsc() {
+    const esc = createIdentifier({ text: 'esc' });
+
+    const line1 = createSetDirective(esc, vtl.createMapLiteral({
+      properties: [
+        createPropertyAssignment({
+          name: createStringLiteral({ value: "q" }),
+          initializer: createStringLiteral({ value: '"', quoteKind: "'" }),
+        })
+      ],
+    }));
+
+    if (!line1) {
+      appendError('Generating prelude code for $esc is failed');
+      return [];
+    }
+
+    return [
+      line1,
+      vtl.createNewLine(),
+    ];
   }
 
   /**

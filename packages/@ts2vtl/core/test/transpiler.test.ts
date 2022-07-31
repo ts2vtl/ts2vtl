@@ -18,7 +18,8 @@ test('appsync-template', () => {
   const vtlString = generator.generateTemplate(files[0]);
 
   expect(vtlString).toMatchInlineSnapshot(`
-"## Function: request
+"## Module: appsync-template
+## Function: request
 #set($String = \\"\\")
 #set($String = \${String.class})
 
@@ -86,6 +87,40 @@ test('appsync-template', () => {
     \\"expressionNames\\": \${util.toJson($expressionNames)},
     \\"expressionValues\\": \${util.toJson($expressionValues)}
   }
+}"
+`);
+});
+
+test('appsync-template', () => {
+  const project = new Project({
+    tsConfigFilePath: "test/tsconfig.json",
+  });
+
+  const source = project.getSourceFileOrThrow("test/templates/apigateway-template.ts");
+  const transpiler = createTranspiler({ source });
+
+  expect(transpiler.getErrors()).toEqual([]);
+
+  const files = transpiler.getFiles();
+
+  const generator = vtl.createGenerator();
+  const vtlString = generator.generateTemplate(files[0]);
+
+  expect(vtlString).toMatchInlineSnapshot(`
+"## Module: apigateway-template
+## Function: request
+#set($esc = {
+  \\"q\\": '\\"'
+})
+
+#set($foo = \${input.params(\\"foo\\")})
+
+#set($json = \\"{
+    \${esc.q}foo\${esc.q}: $foo
+  }\\")
+
+{
+  \\"json\\": $json
 }"
 `);
 });

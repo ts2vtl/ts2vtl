@@ -1,6 +1,6 @@
 {
   "name": "@ts2vtl/vtl",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TS2VTL VTL definitions",
   "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
   "bugs": {

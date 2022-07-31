@@ -190,7 +190,8 @@ export function createGenerator(options: GeneratorOptions = {}): Generator {
       visitNode(node.arg);
       writeLine(')');
     } else if (vtl.isStringLiteral(node)) {
-      write(`"${node.value}"`);
+      const { quoteKind = "\"" } = node;
+      write(`${quoteKind}${node.value}${quoteKind}`);
     } else if (vtl.isTemplateLiteral(node)) {
       write(`"${node.head}`);
       for (const span of node.templateSpans) {

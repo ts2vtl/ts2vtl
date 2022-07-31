@@ -192,6 +192,7 @@ export interface NumericLiteral extends Literal {
 export interface StringLiteral extends Literal {
   kind: SyntaxKind.StringLiteral;
   value: string;
+  quoteKind?: "'" | "\"",
 }
 
 export interface TemplateLiteral extends Literal {

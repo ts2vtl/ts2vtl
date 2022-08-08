@@ -6,11 +6,11 @@
   "author": "Kengo Nakatsuka <kengo.nakatsuka@gmail.com>",
   "devDependencies": {
     "@aws-cdk/aws-appsync-alpha": "^2.26.0-alpha.0",
-    "@ts2vtl/aws-apigateway": "file:../packages/@ts2vtl/aws-apigateway/ts2vtl-aws-apigateway-0.1.0.tgz",
-    "@ts2vtl/aws-appsync": "^0.1.2",
-    "@ts2vtl/core": "file:../packages/@ts2vtl/core/ts2vtl-core-0.1.0.tgz",
-    "@ts2vtl/java-types": "^0.1.0",
-    "@ts2vtl/vtl": "^0.1.0",
+    "@ts2vtl/aws-apigateway": "file:../packages/@ts2vtl/aws-apigateway/ts2vtl-aws-apigateway-0.1.1.tgz",
+    "@ts2vtl/aws-appsync": "file:../packages/@ts2vtl/aws-appsync/ts2vtl-aws-appsync-0.1.2.tgz",
+    "@ts2vtl/core": "file:../packages/@ts2vtl/core/ts2vtl-core-0.1.3.tgz",
+    "@ts2vtl/java-types": "file:../packages/@ts2vtl/java-types/ts2vtl-java-types-0.1.0.tgz",
+    "@ts2vtl/vtl": "file:../packages/@ts2vtl/vtl/ts2vtl-vtl-0.1.1.tgz",
     "@types/node": "^16.11.3",
     "aws-cdk": "^2.26.0",
     "aws-cdk-lib": "^2.26.0",
@@ -36,7 +36,10 @@
   "npm-install-from-local": {
     "devDependencies": {
       "@ts2vtl/aws-apigateway": "../packages/@ts2vtl/aws-apigateway",
-      "@ts2vtl/core": "../packages/@ts2vtl/core"
+      "@ts2vtl/aws-appsync": "../packages/@ts2vtl/aws-appsync",
+      "@ts2vtl/core": "../packages/@ts2vtl/core",
+      "@ts2vtl/java-types": "../packages/@ts2vtl/java-types",
+      "@ts2vtl/vtl": "../packages/@ts2vtl/vtl"
     }
   }
 }
